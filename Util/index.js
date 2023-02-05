@@ -1,8 +1,46 @@
 let secret = "helloworld";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+
+import resolve from "path";
+import formidable from "formidable";
 
 let methods = {
+  uploadFileToLocalServer: (file, path, FileFormat) => {
+    return new Promise((resolve) => {
+      try {
+        let sampleFile = file;
+        let x = new Date();
+        let filename =
+          file.name +
+          "" +
+          x.getDate() +
+          "" +
+          x.getMonth() +
+          "" +
+          x.getFullYear() +
+          "" +
+          x.getHours() +
+          "" +
+          x.getMinutes() +
+          "" +
+          x.getSeconds() +
+          "." +
+          FileFormat;
+        // Use the mv() method to place the file somewhere on your server
+        sampleFile.mv(path + filename, (err) => {
+          if (err) {
+            throw err;
+          }
+          resolve(filename);
+        });
+      } catch (err) {
+        throw err;
+      }
+    });
+  },
   hashPassword: (password) => {
     return new Promise((resolve, reject) => {
       Bcrypt.hash(password, 10, (err, passwordHash) => {
@@ -63,9 +101,9 @@ let methods = {
 
   configCloudinary: () => {
     cloudinary.config({
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECERET,
+      cloud_name: "dr93dv5qy",
+      api_key: "836564686949554",
+      api_secret: "MhP8xdjFcCU4K4NtGfeOBGNMTp0",
     });
     return cloudinary;
   },
@@ -83,13 +121,16 @@ let methods = {
       if (fileType === "Image") {
         //   console.log("fileis -->", file);
         console.log("file type is image ");
+        console.log(`file path is ${file.name}`);
+        // return resolve(file);
         var CloudinaryObj = methods.configCloudinary();
         CloudinaryObj.uploader
-          .upload(file.filepath)
+          .upload(file.name)
           .then((result) => {
             return resolve(result.secure_url);
           })
           .catch((err) => {
+            console.log(`error is ${err}`);
             return reject(err);
             // console.log(`error is ${err}`);
           });
