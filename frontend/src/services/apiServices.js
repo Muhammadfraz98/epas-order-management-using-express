@@ -1,17 +1,16 @@
 import axios from "axios";
 
 export const apiServices = async (type, endpoint, data) => {
-    // https://daftar-pro-stage.herokuapp.com/
     let location = window.location.origin
 
-    // const DEV_BASE_URL = "https://daftar-pro-stage.herokuapp.com"
-    // const PRD_BASE_URL = "https://hrms.herokuapp.com";
+    // const DEV_BASE_URL = "https://devurl.com"
+    // const PRD_BASE_URL = "https://prdurl.com";
 
-    // let BASE_URL = (location === "https://www.daftarpro.com" || location === "https://daftarpro.com") ? PRD_BASE_URL : DEV_BASE_URL
+    // let BASE_URL = (location === "https://www.prdurl.com" || location === "https://prdurl.com") ? PRD_BASE_URL : DEV_BASE_URL
     let BASE_URL = "http://localhost:3001"
 
     let AuthObj= JSON.parse(localStorage.getItem('user'));
-    let athtoken= AuthObj?.acesstoken;
+    let athtoken= AuthObj?.access_token;
     
     if (type === "GET") {
         try {
