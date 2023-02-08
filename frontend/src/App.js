@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path='/' exact element={
+            <Route path='/home' exact element={
               <RequireAuth>
                 <Dashboard />
               </RequireAuth>

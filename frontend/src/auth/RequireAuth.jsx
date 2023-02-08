@@ -4,7 +4,8 @@ import {Navigate} from 'react-router-dom'
 
 function RequireAuth({ children }) {
     
-  const token = localStorage.getItem('user_login')
+  const user = JSON.parse(localStorage.getItem('user'))
+  let token = user?.access_token ? user?.access_token : null
   
     if (!token) {
       

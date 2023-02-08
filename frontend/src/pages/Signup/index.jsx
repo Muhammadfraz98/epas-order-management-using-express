@@ -10,19 +10,50 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './style.css'
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const theme = createTheme();
 
 export default function Signup() {
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+        let NewUser = {
             email: data.get('email'),
             password: data.get('password'),
-        });
+            role: data.get('role')
+        }
+        await axios.post(`http://localhost:3001/user/addUser`, NewUser)
+        .then(response => {
+                toast.success('User Created!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            }).catch((err)=>{
+                toast.error(`${err?.response?.data?.msg ? err?.response?.data?.msg : 'Server Error'}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+            })
     };
 
     return (
@@ -30,6 +61,18 @@ export default function Signup() {
             <ThemeProvider theme={theme}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
+                    <ToastContainer 
+                        position="top-right"
+                        autoClose={3000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        theme="light"
+                    />
                     <Box
                         sx={{
                             marginTop: 8,
@@ -46,45 +89,39 @@ export default function Signup() {
                         </Typography>
                         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                             <Grid container spacing={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        name="firstName"
-                                        required
-                                        fullWidth
-                                        id="firstName"
-                                        label="First Name"
-                                        autoFocus
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="role"
-                                        label="Role"
-                                        name="role"
-                                    />
-                                </Grid>
                                 <Grid item xs={12}>
+                                    <InputLabel id="email-label">Email Address</InputLabel>
                                     <TextField
                                         required
                                         fullWidth
                                         id="email"
-                                        label="Email Address"
                                         name="email"
                                         autoComplete="email"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
+                                    <InputLabel id="password-label">Password</InputLabel>
                                     <TextField
                                         required
                                         fullWidth
                                         name="password"
-                                        label="Password"
                                         type="password"
                                         id="password"
                                         autoComplete="new-password"
                                     />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <InputLabel id="role-label">Role</InputLabel>
+                                    <Select
+                                        id="role"
+                                        name="role"
+                                        fullWidth
+                                        required
+                                    >
+                                        <MenuItem value={"ENDUSER"}>USER</MenuItem>
+                                        <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
+                                        <MenuItem value={"Thirty"}>Thirty</MenuItem>
+                                    </Select>
                                 </Grid>
                             </Grid>
                             <Button
