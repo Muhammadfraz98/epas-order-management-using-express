@@ -76,7 +76,10 @@ let methods = {
             Success: false,
           });
         } else {
-          let access_token = await utils.issueToken({ _id: user._id });
+          let access_token = await utils.issueToken({
+            _id: user._id,
+            email: user.email,
+          });
 
           let result = {
             user: {
