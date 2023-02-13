@@ -10,13 +10,14 @@ import RequireAuth from './auth/RequireAuth';
 import Dashboard from './pages/Home';
 
 function App() {
+  
   return (
     <div className="App">
        <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path='/home' exact element={
+            <Route path='/' exact element={
               <RequireAuth>
                 <Dashboard />
               </RequireAuth>

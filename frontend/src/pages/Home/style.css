@@ -1,0 +1,26 @@
+.dashboard-page{
+    background: url('../../assets/signup.png');
+        height: 100vh;
+}
+
+
+.add-order-action{
+    margin: 20px;
+        float: right;
+}
+
+.ant-table{
+        background: #ffffff9e !important; 
+}
+
+.orders-table-data{
+    margin: 0 20px;
+}
+
+.modal-content{
+    margin: 30px 0;
+}
+.modal-actions{
+    text-align: right;
+}
+

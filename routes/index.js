@@ -16,7 +16,7 @@ router.post("/user/addUser", userController.createUser);
 
 router.post("/order/addOrder", authPolicy, orderController.addOrder);
 
-router.post("/order/viewOrder", authPolicy, orderController.ViewOrders);
+router.get("/order/viewOrder", authPolicy, orderController.ViewOrders);
 
 router.post("/order/updateOrder", authPolicy, orderController.UpdateOrder);
 

@@ -3,13 +3,13 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Tooltip from '@mui/material/Tooltip';
 import { useNavigate } from 'react-router-dom';
+import './styles.css'
 
 
 export default function Navbar() {
@@ -38,7 +38,7 @@ export default function Navbar() {
                 <Toolbar>
                     
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        EPAS Order Mnangement System
+                        Order Management System
                     </Typography>
                     <div>
                         <IconButton

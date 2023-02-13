@@ -120,7 +120,7 @@ export default function Signup() {
                                     >
                                         <MenuItem value={"ENDUSER"}>USER</MenuItem>
                                         <MenuItem value={"ADMIN"}>ADMIN</MenuItem>
-                                        <MenuItem value={"Thirty"}>Thirty</MenuItem>
+                                        <MenuItem value={"SUPPLIER"}>SUPPLIER</MenuItem>
                                     </Select>
                                 </Grid>
                             </Grid>

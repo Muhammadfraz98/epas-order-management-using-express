@@ -43,7 +43,7 @@ export default function Login() {
                     progress: undefined,
                     theme: "light",
                 });
-                navigate("/home")
+                navigate("/")
                 
             }else{
                 toast.error('User login failed!', {
