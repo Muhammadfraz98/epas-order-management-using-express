@@ -86,7 +86,7 @@ let methods = {
               _id: user._id,
               email: user.email,
               userName: user.userName,
-              role: user.role
+              role: user.role,
             },
 
             access_token,
