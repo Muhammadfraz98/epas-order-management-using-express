@@ -5,7 +5,7 @@ import { apiServices } from '../../services/apiServices'
 import { Space, Table, Button, Modal, Input } from 'antd';
 import './style.css'
 import { PlusCircleOutlined  } from "@ant-design/icons";
-
+import { apiUploadFile } from '../../services/apiUploadFile';
 
 const Dashboard = () => {
 
@@ -91,6 +91,11 @@ const Dashboard = () => {
   const [orders, setOrders] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editRecord, setEditRecord] = useState(false)
+
+  const [file, setFile] = useState({
+    url: ""
+  });
+
   
   useEffect(() => {
     getOrders()
@@ -115,6 +120,19 @@ const Dashboard = () => {
     }else{
       setEditRecord(true)
     }
+  }
+
+
+  const handleChange =  (file)=>{
+    let splashScreen = document.getElementById(`staticFile`).files[0];
+    console.log("file====>", file);
+    // apiUploadtoS3
+    apiUploadFile(splashScreen).then((res) => {
+      console.log('splashScreen response =>', res.data.link)
+      setFile({
+        url: res.data.link
+      })
+    })
   }
 
   return (
@@ -161,7 +179,24 @@ const Dashboard = () => {
             <p>Description</p>
             <Input placeholder="Basic usage" />
             <p>Upload File</p>
-            <
+           <div>
+            {(file?.url !== "") ?
+              <div style={{ width: '100%', height: '100%' }}>
+                <img src={file?.url} alt="NoImage" style={{ width: '100%', height: '100%' }} />
+              </div>
+              :
+              <div style={{ height: '100%' }}>
+                <label className='static-upload-btn'>
+                  <form action="" method="post" enctype="multipart/form-data" >
+                    {/* <img src={staticUploader} style={{ display: file?.url ? 'none' : 'inherit' }}
+                      alt="."
+                    /> */}
+                      <input type="file" id="staticFile" onChange={handleChange} />
+                  </form>
+                </label>
+              </div>
+            }
+           </div>
           </div>
         <div className='modal-actions'>
           {editRecord
