@@ -51,14 +51,11 @@ app.listen(3001, (err) => {
 });
 // httpsServer.listen(443);
 
-mongoose.connect(
-  "mongodb+srv://Aness:qwer1234@epasordermanagement.sh0y53g.mongodb.net/?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    // useFindAndModify: false,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect(process.env.mongoDbUrl, {
+  useNewUrlParser: true,
+  // useFindAndModify: false,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 

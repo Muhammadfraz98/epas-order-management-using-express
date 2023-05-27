@@ -101,9 +101,9 @@ let methods = {
 
   configCloudinary: () => {
     cloudinary.config({
-      cloud_name: "dr93dv5qy",
-      api_key: "836564686949554",
-      api_secret: "MhP8xdjFcCU4K4NtGfeOBGNMTp0",
+      cloud_name: process.env.cloud_name,
+      api_key: process.env.api_key,
+      api_secret: process.env.api_secret,
     });
     return cloudinary;
   },
